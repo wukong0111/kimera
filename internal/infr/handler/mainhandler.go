@@ -27,7 +27,7 @@ func HomeHandler(db *pgxpool.Pool) domain.Handler {
 		}
 
 		data := map[string]string{
-			"js": "/static/index.js" + strconv.FormatInt(time.Now().Unix(), 16),
+			"js": "index.js?" + strconv.FormatInt(time.Now().Unix(), 16),
 		}
 		err = ts.ExecuteTemplate(w, "index.html", data)
 		if err != nil {

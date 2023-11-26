@@ -25,8 +25,8 @@ func Start(dbpool *pgxpool.Pool) error {
 	if err != nil {
 		return err
 	}
-	filesDir := http.Dir(filepath.Join(workDir, "web"))
-	r.Handle("/static/*", http.FileServer(filesDir))
+	filesDir := http.Dir(filepath.Join(workDir, "web/static"))
+	r.Handle("/*", http.FileServer(filesDir))
 
 	port := os.Getenv("PORT")
 
