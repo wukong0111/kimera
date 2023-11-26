@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build:dev": "NODE_ENV=development bun run builder.js",
+    "build:prod": "NODE_ENV=production bun run builder.js"
+  },
+  "dependencies": {
+    "htmx.org": "^1.9.8"
+  }
+}
