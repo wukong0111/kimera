@@ -10,7 +10,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/wukong0111/gocms/internal/infr/handler"
+	"github.com/wukong0111/kimera/internal/infr/handler"
 )
 
 func Start(dbpool *pgxpool.Pool) error {
@@ -28,7 +28,11 @@ func Start(dbpool *pgxpool.Pool) error {
 	filesDir := http.Dir(filepath.Join(workDir, "web"))
 	r.Handle("/static/*", http.FileServer(filesDir))
 
-	// Configurar el servidor HTTP
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "8080"
+	}
 	server := &http.Server{
 		Addr:         ":8080",
 		Handler:      r, // Usa el enrutador de chi como el handler

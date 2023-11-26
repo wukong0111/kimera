@@ -1,7 +1,11 @@
 package handler
 
 import (
+	"html/template"
+	"log"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -12,11 +16,23 @@ import (
 
 func HomeHandler(db *pgxpool.Pool) domain.Handler {
 	return func(w http.ResponseWriter, r *http.Request) error {
-		user, err := getUserByID(db, "28acbcfd-a5e6-4941-b32c-30d55242871a")
+		log.Println("responding to request")
+		files := []string{
+			"./web/templates/index.html",
+		}
+		ts, err := template.ParseFiles(files...)
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+
+		data := map[string]string{
+			"js": "/static/index.js" + strconv.FormatInt(time.Now().Unix(), 16),
+		}
+		err = ts.ExecuteTemplate(w, "index.html", data)
 		if err != nil {
 			return err
 		}
-		w.Write([]byte(user.Username))
 		return nil
 	}
 }
@@ -33,6 +49,13 @@ func CreateUserHandler(db *pgxpool.Pool) domain.Handler {
 		if err != nil {
 			return err
 		}
+
+		user, err = getUserByID(db, user.ID.String())
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+
 		w.Write([]byte("hello world!"))
 		return nil
 	}

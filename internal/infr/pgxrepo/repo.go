@@ -7,7 +7,7 @@ import (
 	"github.com/georgysavva/scany/v2/pgxscan"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/wukong0111/gocms/internal/domain/user"
+	"github.com/wukong0111/kimera/internal/domain/user"
 	"golang.org/x/crypto/bcrypt"
 )
 

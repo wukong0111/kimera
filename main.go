@@ -9,7 +9,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli/v2"
-	"github.com/wukong0111/gocms/internal/infr/server"
+	"github.com/wukong0111/kimera/internal/infr/server"
 )
 
 func main() {

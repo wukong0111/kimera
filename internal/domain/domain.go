@@ -2,6 +2,7 @@ package domain
 
 import (
 	"errors"
+	"log"
 	"net/http"
 )
 
@@ -30,7 +31,7 @@ func (fn Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 func (handler Handler) Adapt() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		handler(w, r)
+		handler.ServeHTTP(w, r)
 	}
 }
 
@@ -44,4 +45,5 @@ func handleError(w http.ResponseWriter, err error) {
 		// Manejar otros errores
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 	}
+	log.Println(err)
 }
