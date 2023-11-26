@@ -5,9 +5,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/wukong0111/gocms/internal/domain"
-	"github.com/wukong0111/gocms/internal/domain/user"
-	repo "github.com/wukong0111/gocms/internal/infr/pgxrepo"
+	"github.com/wukong0111/kimera/internal/domain"
+	"github.com/wukong0111/kimera/internal/domain/user"
+	repo "github.com/wukong0111/kimera/internal/infr/pgxrepo"
 )
 
 func HomeHandler(db *pgxpool.Pool) domain.Handler {
@@ -21,7 +21,7 @@ func HomeHandler(db *pgxpool.Pool) domain.Handler {
 	}
 }
 
-func CreateUser(db *pgxpool.Pool) domain.Handler {
+func CreateUserHandler(db *pgxpool.Pool) domain.Handler {
 	return func(w http.ResponseWriter, r *http.Request) error {
 		repo := repo.New(db)
 		id, err := uuid.NewRandom()

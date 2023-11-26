@@ -8,7 +8,7 @@ import (
 type DomainError struct {
 	Code    int
 	Message string
-	Err     error // Error original, opcional
+	Err     error // Original error (optional)
 }
 
 func (e *DomainError) Error() string {
